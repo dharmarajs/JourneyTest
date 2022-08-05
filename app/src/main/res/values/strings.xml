@@ -6,4 +6,6 @@
     <string name="second_fragment_label">Detail</string>
     <string name="comments">Comments</string>
     <string name="search">Search</string>
+    <string name="search_title">Search Title</string>
+    <string name="search_email">Search Email</string>
 </resources>

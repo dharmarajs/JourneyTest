@@ -1,9 +1,6 @@
 package com.example.journeytest.ui.postdetail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.*
 import com.example.journeytest.data.entities.Comment
 import com.example.journeytest.data.entities.Post
 import com.example.journeytest.data.repository.PostRepository
@@ -24,10 +21,24 @@ class PostsDetailViewModel @Inject constructor(
 
     private val _comments = _id.switchMap { id ->
         repository.getCommentsPostById(id)
-    }
+    } as MutableLiveData
+
     val comments: LiveData<Resource<List<Comment>>> = _comments
 
     fun start(id: Int) {
         _id.value = id
+    }
+
+    fun getSearchResultForComment(email: String) {
+        repository.getSearchResultForComment(email).observeForever(object : Observer<List<Comment>> {
+            override fun onChanged(comments: List<Comment>?) {
+                if (comments == null) {
+                    return
+                }
+                _comments.apply {
+                    value = Resource.success(comments)
+                }
+            }
+        })
     }
 }

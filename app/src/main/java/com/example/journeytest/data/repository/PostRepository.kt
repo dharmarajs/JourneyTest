@@ -2,6 +2,7 @@ package com.example.journeytest.data.repository
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.example.journeytest.data.entities.Comment
 import com.example.journeytest.data.entities.Post
 import com.example.journeytest.data.local.PostDao
 import com.example.journeytest.data.remote.PostRemoteDataSource
@@ -34,5 +35,8 @@ class PostRepository @Inject constructor(
 
     fun getSearchResultForPost(title: String): LiveData<List<Post>> {
         return localDataSource.getSearchResultForPost("%${title.trim()}%")
+    }
+    fun getSearchResultForComment(email: String): LiveData<List<Comment>> {
+        return localDataSource.getSearchResultForComment("%${email.trim()}%")
     }
 }

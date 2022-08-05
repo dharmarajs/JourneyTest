@@ -39,5 +39,9 @@ interface PostDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertComment(comment: Comment)
 
+    @Query("Select * from comments where email like :email")
+    fun getSearchResultForComment(email : String) : LiveData<List<Comment>>
+
+
 
 }

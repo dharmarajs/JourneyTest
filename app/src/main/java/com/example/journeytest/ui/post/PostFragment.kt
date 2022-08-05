@@ -84,6 +84,7 @@ class PostFragment : Fragment(), PostAdapter.PostItemListener {
             searchView = searchItem.actionView as SearchView
         }
         if (searchView != null) {
+            searchView?.queryHint = resources.getString(R.string.search_title)
             searchView?.maxWidth = Integer.MAX_VALUE
             searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
             queryTextListener = object : SearchView.OnQueryTextListener {
