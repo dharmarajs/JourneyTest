@@ -24,6 +24,9 @@ interface PostDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPost(post: Post)
 
+    @Query("Select * from posts where title like :title")
+    fun getSearchResultForPost(title : String) : LiveData<List<Post>>
+
     @Query("SELECT * FROM comments WHERE postId = :id")
     fun getAllCommentsByPostId(id: Int): LiveData<List<Comment>>
 
